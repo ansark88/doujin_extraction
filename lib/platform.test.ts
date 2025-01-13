@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { PlatformList, extractCircleID, getCircleUrl, getPlatformByDomain, getProductUrl } from "./platform";
+import {
+	PlatformList,
+	extractCircleID,
+	getCircleUrl,
+	getPlatformByDomain,
+	getProductUrl,
+} from "./platform";
 
 describe("extractCircleID()", () => {
 	it("x", () => {
@@ -37,19 +43,21 @@ describe("extractCircleID()", () => {
 
 	it("fanza", () => {
 		const platform = PlatformList.fanza;
-		const url = "https://www.dmm.co.jp/dc/doujin/-/list/=/article=maker/id=123/";
+		const url =
+			"https://www.dmm.co.jp/dc/doujin/-/list/=/article=maker/id=123/";
 		const result = extractCircleID(platform, url);
 
 		expect(result).toBe("123");
-	})
+	});
 
 	it("dlsite", () => {
 		const platform = PlatformList.dlsite;
-		const url = "https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG123.html";
+		const url =
+			"https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG123.html";
 		const result = extractCircleID(platform, url);
 
 		expect(result).toBe("RG123");
-	})
+	});
 
 	it("melonbooks", () => {
 		const platform = PlatformList.melonbooks;
@@ -57,36 +65,40 @@ describe("extractCircleID()", () => {
 		const result = extractCircleID(platform, url);
 
 		expect(result).toBe("123");
-	})
-
+	});
 });
 
-describe("getProductUrl", () =>{
+describe("getProductUrl", () => {
 	it("dlsite", () => {
 		const platform = PlatformList.dlsite;
 		const code = "RJ123";
 		const result = getProductUrl(platform, code);
 
-		expect(result).toBe("https://www.dlsite.com/maniax/work/=/product_id/RJ123.html")
-	})
-})
+		expect(result).toBe(
+			"https://www.dlsite.com/maniax/work/=/product_id/RJ123.html",
+		);
+	});
+});
 
-describe("getCircleUrl", () =>{
+describe("getCircleUrl", () => {
 	it("dlsite", () => {
 		const platform = PlatformList.dlsite;
 		const code = "RG123";
 		const result = getCircleUrl(platform, code);
 
-		expect(result).toBe("https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG123.html")
-	})
-})
+		expect(result).toBe(
+			"https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG123.html",
+		);
+	});
+});
 
-describe("getPlatformBydomain", () =>{
+describe("getPlatformBydomain", () => {
 	it("dlsite", () => {
-		const result = getPlatformByDomain('https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG123.html');
+		const result = getPlatformByDomain(
+			"https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG123.html",
+		);
 		console.log(result);
 
-		expect(result).toBe(PlatformList.dlsite)
-	})
-})
-
+		expect(result).toBe(PlatformList.dlsite);
+	});
+});
