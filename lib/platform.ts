@@ -53,7 +53,7 @@ const PLATFORMS: Record<PlatformId, PlatformDetail> = {
 
 	twitter: {
 		name: "Twitter",
-		domains: ["twitter.com, x.com"],
+		domains: ["twitter.com", "x.com"],
 		circleid_string: [],
 		productUrlPattern: null,
 		cicrleUrlPattern: "https://x.com/{circle_code}",
@@ -121,6 +121,10 @@ export const extractCircleID = (platform: Platform, url: string) => {
 		case PlatformList.fanza:
 			return url.match(/id=(.+)/)?.[1].replace("/", "");
 		case PlatformList.pixiv:
+			if (url.includes("member.php")) {
+				return url.match(/member.php\?id=(.+)/)?.[1].replace("/", "");
+			}
+
 			return url.match(/users\/(.+)/)?.[1].replace("/", "");
 		case PlatformList.twitter:
 			return url.match(/(x|twitter).com\/(.+)/)?.[2].replace("/", "");

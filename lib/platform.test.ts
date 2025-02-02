@@ -32,14 +32,13 @@ describe("extractCircleID()", () => {
 		expect(result).toBe("123");
 	});
 
-	// まだ対応してない
-	// it("pixiv(member.php)", () => {
-	// 	const platform = PlatformList.pixiv;
-	// 	const url = "https://www.pixiv.net/member.php?id=123";
-	// 	const result = extractCircleID(platform, url);
+	it("pixiv(member.php)", () => {
+		const platform = PlatformList.pixiv;
+		const url = "https://www.pixiv.net/member.php?id=123";
+		const result = extractCircleID(platform, url);
 
-	// 	expect(result).toBe("123");
-	// })
+		expect(result).toBe("123");
+	});
 
 	it("fanza", () => {
 		const platform = PlatformList.fanza;
@@ -97,8 +96,19 @@ describe("getPlatformBydomain", () => {
 		const result = getPlatformByDomain(
 			"https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG123.html",
 		);
-		console.log(result);
 
 		expect(result).toBe(PlatformList.dlsite);
+	});
+
+	it("twitter", () => {
+		const result = getPlatformByDomain("https://twitter.com/rg123");
+		expect(result).toBe(PlatformList.twitter);
+	});
+
+	it("pixiv", () => {
+		const result = getPlatformByDomain(
+			"http://www.pixiv.net/member.php?id=1234",
+		);
+		expect(result).toBe(PlatformList.pixiv);
 	});
 });

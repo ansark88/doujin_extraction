@@ -29,52 +29,52 @@ const i = {
   },
   twitter: {
     name: "Twitter",
-    domains: ["twitter.com, x.com"],
+    domains: ["twitter.com", "x.com"],
     circleid_string: [],
     productUrlPattern: null,
     cicrleUrlPattern: "https://x.com/{circle_code}"
   }
 }, c = Object.fromEntries(
-  Object.entries(i).map(([e, t]) => [e, t.name])
+  Object.entries(i).map(([t, e]) => [t, e.name])
 );
-function s(e) {
-  return e in i;
+function m(t) {
+  return t in i;
 }
-const d = (e) => s(e) ? i[e] : Object.values(i).find((t) => t.name === e), m = (e, t) => {
-  const r = d(e);
-  return r != null && r.productUrlPattern ? r.productUrlPattern.replace("{product_code}", t) : "";
-}, p = (e, t) => {
-  const r = d(e);
-  return r != null && r.cicrleUrlPattern ? r.cicrleUrlPattern.replace("{circle_code}", t) : "";
-}, u = (e) => {
-  const t = Object.values(i).find(
-    (r) => r.domains.some((n) => e.includes(n))
+const s = (t) => m(t) ? i[t] : Object.values(i).find((e) => e.name === t), p = (t, e) => {
+  const r = s(t);
+  return r != null && r.productUrlPattern ? r.productUrlPattern.replace("{product_code}", e) : "";
+}, u = (t, e) => {
+  const r = s(t);
+  return r != null && r.cicrleUrlPattern ? r.cicrleUrlPattern.replace("{circle_code}", e) : "";
+}, w = (t) => {
+  const e = Object.values(i).find(
+    (r) => r.domains.some((n) => t.includes(n))
   );
-  return t == null ? void 0 : t.name;
-}, w = (e, t) => {
-  var r, n, o, a, l;
-  if (!t)
+  return e == null ? void 0 : e.name;
+}, h = (t, e) => {
+  var r, n, o, a, d, l;
+  if (!e)
     return "";
-  switch (e) {
+  switch (t) {
     case c.dlsite:
-      return (r = t.match(/maker_id\/(.+?)\.html/)) == null ? void 0 : r[1].replace("/", "");
+      return (r = e.match(/maker_id\/(.+?)\.html/)) == null ? void 0 : r[1].replace("/", "");
     case c.melonbooks:
-      return (n = t.match(/circle_id=(.+)/)) == null ? void 0 : n[1].replace("/", "");
+      return (n = e.match(/circle_id=(.+)/)) == null ? void 0 : n[1].replace("/", "");
     case c.fanza:
-      return (o = t.match(/id=(.+)/)) == null ? void 0 : o[1].replace("/", "");
+      return (o = e.match(/id=(.+)/)) == null ? void 0 : o[1].replace("/", "");
     case c.pixiv:
-      return (a = t.match(/users\/(.+)/)) == null ? void 0 : a[1].replace("/", "");
+      return e.includes("member.php") ? (a = e.match(/member.php\?id=(.+)/)) == null ? void 0 : a[1].replace("/", "") : (d = e.match(/users\/(.+)/)) == null ? void 0 : d[1].replace("/", "");
     case c.twitter:
-      return (l = t.match(/(x|twitter).com\/(.+)/)) == null ? void 0 : l[2].replace("/", "");
+      return (l = e.match(/(x|twitter).com\/(.+)/)) == null ? void 0 : l[2].replace("/", "");
     default:
       return "";
   }
 };
 export {
   c as PlatformList,
-  w as extractCircleID,
-  p as getCircleUrl,
-  u as getPlatformByDomain,
-  d as getPlatformDetail,
-  m as getProductUrl
+  h as extractCircleID,
+  u as getCircleUrl,
+  w as getPlatformByDomain,
+  s as getPlatformDetail,
+  p as getProductUrl
 };
