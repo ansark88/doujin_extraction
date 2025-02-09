@@ -105,10 +105,15 @@ describe("getPlatformBydomain", () => {
 		expect(result).toBe(PlatformList.twitter);
 	});
 
-	it("pixiv", () => {
+	it("pixiv(member.php)", () => {
 		const result = getPlatformByDomain(
-			"http://www.pixiv.net/member.php?id=1234",
+			"https://www.pixiv.net/member.php?id=1234",
 		);
+		expect(result).toBe(PlatformList.pixiv);
+	});
+
+	it("pixiv(users)", () => {
+		const result = getPlatformByDomain("https://www.pixiv.net/users/1234");
 		expect(result).toBe(PlatformList.pixiv);
 	});
 });
